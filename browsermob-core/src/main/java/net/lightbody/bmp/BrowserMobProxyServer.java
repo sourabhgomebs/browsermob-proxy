@@ -938,6 +938,16 @@ public class BrowserMobProxyServer implements BrowserMobProxy {
     }
 
     /**
+     * <b>Note:</b> The current implementation of this method forces a maximum response size of 2 MiB. To adjust the maximum response size, or
+     * to disable aggregation (which disallows access to the {@link net.lightbody.bmp.util.HttpMessageContents}), you may add the filter source
+     * directly: <code>addFirstHttpFilterFactory(new ResponseFilterAdapter.FilterSource(filter, bufferSizeInBytes));</code>
+     */
+    @Override
+    public void addResponseFilterWithCustomBufferSize(ResponseFilter filter, int bufferSize) {
+        addLastHttpFilterFactory(new ResponseFilterAdapter.FilterSource(filter, bufferSize));
+    }
+
+    /**
      * <b>Note:</b> The current implementation of this method forces a maximum request size of 2 MiB. To adjust the maximum request size, or
      * to disable aggregation (which disallows access to the {@link net.lightbody.bmp.util.HttpMessageContents}), you may add the filter source
      * directly: <code>addFirstHttpFilterFactory(new RequestFilterAdapter.FilterSource(filter, bufferSizeInBytes));</code>

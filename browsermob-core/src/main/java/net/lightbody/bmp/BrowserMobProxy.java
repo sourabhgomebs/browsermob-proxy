@@ -599,6 +599,12 @@ public interface BrowserMobProxy {
     void addResponseFilter(ResponseFilter filter);
 
     /**
+     * Adds a new ResponseFilter that can be used to examine and manipulate the response before sending it to the client.
+     *
+     * @param filter filter instance
+     */
+    void addResponseFilterWithCustomBufferSize(ResponseFilter filter, int size);
+    /**
      * Adds a new RequestFilter that can be used to examine and manipulate the request before sending it to the server.
      *
      * @param filter filter instance

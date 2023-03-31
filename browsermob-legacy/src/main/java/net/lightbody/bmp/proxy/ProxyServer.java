@@ -931,6 +931,11 @@ public class ProxyServer implements LegacyProxyServer, BrowserMobProxy {
     }
 
     @Override
+    public void addResponseFilterWithCustomBufferSize(ResponseFilter filter, int bufferSize) {
+        LOG.warn("The legacy ProxyServer implementation does not support addResquestFilterWithCustomBufferSize and addResponseFilterWithCustomBufferSize. Use addRequestInterceptor/addResponseInterceptor instead.");
+    }
+
+    @Override
     public void addRequestFilter(RequestFilter filter) {
         LOG.warn("The legacy ProxyServer implementation does not support addRequestFilter and addResponseFilter. Use addRequestInterceptor/addResponseInterceptor instead.");
     }

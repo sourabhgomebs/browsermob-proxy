@@ -407,7 +407,17 @@ public class ProxyResource {
         String script = getEntityBodyFromRequest(request);
         requestResponseFilter.setResponseFilterScript(script);
 
-        proxy.addResponseFilter(requestResponseFilter);
+        String bufferSize = request.param("bufferSize");
+        if (bufferSize != null && !bufferSize.isEmpty()) {
+            try {
+                proxy.addResponseFilterWithCustomBufferSize(requestResponseFilter, Integer.parseInt(bufferSize));
+            } catch(Exception e) {
+                proxy.addResponseFilter(requestResponseFilter);
+            }
+        }
+        else {
+            proxy.addResponseFilter(requestResponseFilter);
+        }
 
         return Reply.saying().ok();
     }
